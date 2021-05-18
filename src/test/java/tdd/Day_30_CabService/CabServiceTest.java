@@ -40,7 +40,25 @@ public class CabServiceTest {
 		final int minute=7;
 		final int numOfRides=3;
 		double totalFare=cabService.calculateFare(distance,minute);
-		double totalFareForMultipleRide=cabService.totalFareForMultipleRide(totalFare,numOfRides);
-		assertEquals(90, totalFareForMultipleRide,0);
+		double totalFareForMultipleRides=cabService.totalFareForMultipleRides(totalFare,numOfRides);
+		assertEquals(90, totalFareForMultipleRides,0);
+	}
+	
+	@Test
+	public void testShouldReturn_TotalFare_AverageFarePerRide_and_TotalNumOfRides() {	
+		
+		final double distance =2.3;
+		final int minute=7;
+		double totalFare=cabService.calculateFare(distance,minute);
+		
+		final int numOfRides=3;
+		double totalFareForMultipleRides=cabService.totalFareForMultipleRides(totalFare,numOfRides);
+		assertEquals(90, totalFareForMultipleRides,0);
+		
+		double averageFarePerRide=cabService.averageFarePerRide(totalFareForMultipleRides,numOfRides);
+		assertEquals(30, averageFarePerRide,0);
+		
+		final int numberOfRides=cabService.returnNumOfRides(totalFareForMultipleRides,averageFarePerRide);
+		assertEquals(3, numberOfRides ,0);
 	}
 }
