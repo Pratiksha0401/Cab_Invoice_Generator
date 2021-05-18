@@ -8,33 +8,31 @@ public class CabService {
 	
 	public double calculateFare(final double distance, final int minute) {
 		
+		totalfare=(distance*10) + minute;
 		
-		if(distance==0.0 && minute==0) {
+		if(totalfare==0.0) {
 			return totalfare=0;			
 		}
 			
-		if(distance < 1.0 && minute<=5 ) {
+		if(totalfare<5.0 ) {
 			return totalfare=5;
 		}
-		totalfare=(distance*10) + minute;
 		
 		return totalfare;
 	}
 
-	public double totalFareForMultipleRides(final double totalFare2, final int numOfRides) {
-		
-		totalFareForMultipleRides = totalFare2 * numOfRides;
-		
-		return totalFareForMultipleRides;
+	public double calculateTotalFare(Ride[] rides) {
+		for(Ride ride:rides) {
+			totalfare+=this.calculateFare(ride.distance, ride.minute);
+		}
+		return totalfare;
 	}
 
-	public double averageFarePerRide(double totalFareForMultipleRides, int numOfRides) {
-		
-		averagefarePerRide=(totalFareForMultipleRides / numOfRides);
-		
+	public double averagefarePerRide(double totalFare2, int length) {
+		averagefarePerRide=totalFare2/length;
 		return averagefarePerRide;
 	}
-
+	
 	public int returnNumOfRides(double totalFareForMultipleRides2, double averageFarePerRide2) {
 
 		int numOfRides= (int) ( totalFareForMultipleRides2 / averageFarePerRide2 );

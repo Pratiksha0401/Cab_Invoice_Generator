@@ -19,8 +19,8 @@ public class CabServiceTest {
 	@Test
 	public void testCalculateFare_Should_Return_Min_Fare() {
 		
-		final double distance =0.5;
-		final int minute=5;
+		final double distance =0.1;
+		final int minute=1;
 		double totalFare=cabService.calculateFare(distance,minute);
 		assertEquals(5, totalFare,0);
 	}
@@ -36,29 +36,26 @@ public class CabServiceTest {
 	@Test
 	public void testCalculateTotalFare_Should_ReturnTotalFare_forMultipleRides() {	
 		
-		final double distance =2.3;
-		final int minute=7;
-		final int numOfRides=3;
-		double totalFare=cabService.calculateFare(distance,minute);
-		double totalFareForMultipleRides=cabService.totalFareForMultipleRides(totalFare,numOfRides);
-		assertEquals(90, totalFareForMultipleRides,0);
+		Ride [] rides= {new Ride(2.0,5),
+						new Ride(0.1,1)
+								};
+		double Fare=cabService.calculateTotalFare(rides);
+		assertEquals(30.0, Fare , 0);
 	}
 	
 	@Test
-	public void testShouldReturn_TotalFare_AverageFarePerRide_and_TotalNumOfRides() {	
+	public void test_shouldReturn_TotalFare_averageFarePerRide_and_numOfRides() {	
+		Ride [] rides= {new Ride(2.0,5),
+						new Ride(0.1,1)
+						};
+	
+		double totalFare=cabService.calculateTotalFare(rides);
+		assertEquals(30.0, totalFare , 0);
 		
-		final double distance =2.3;
-		final int minute=7;
-		double totalFare=cabService.calculateFare(distance,minute);
+		double averageFarePerRide=cabService.averagefarePerRide(totalFare,rides.length);
+		assertEquals(15.0, averageFarePerRide,0.0);
 		
-		final int numOfRides=3;
-		double totalFareForMultipleRides=cabService.totalFareForMultipleRides(totalFare,numOfRides);
-		assertEquals(90, totalFareForMultipleRides,0);
-		
-		double averageFarePerRide=cabService.averageFarePerRide(totalFareForMultipleRides,numOfRides);
-		assertEquals(30, averageFarePerRide,0);
-		
-		final int numberOfRides=cabService.returnNumOfRides(totalFareForMultipleRides,averageFarePerRide);
-		assertEquals(3, numberOfRides ,0);
-	}
+		int numOfRides=cabService.returnNumOfRides(totalFare, averageFarePerRide);
+		assertEquals(2, numOfRides);
+	}	
 }
