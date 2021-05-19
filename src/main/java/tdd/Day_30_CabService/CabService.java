@@ -6,9 +6,13 @@ public class CabService {
 	double totalFareForMultipleRides;
 	double averagefarePerRide;
 	
+	private static final double MIN_COST_PER_KM=10;
+	private static final int MIN_COST_PER_MINUTE=1;
+	private static final int MIN_FARE=5;
+	
 	public double calculateFare(final double distance, final int minute) {
 		
-		totalfare=(distance*10) + minute;
+		totalfare=(distance*MIN_COST_PER_KM) + minute;
 		
 		if(totalfare==0.0) {
 			return totalfare=0;			
@@ -36,5 +40,24 @@ public class CabService {
 		}
 		 averageFare = totalfare/ride.length;
 		return new InvoiceSummary(ride.length, totalfare, averageFare);
+	}
+	
+	public double calculateFare(String choice, double distance, int minute) {
+		if(choice.equalsIgnoreCase("Normal")) {
+			int costPerMinute =1;
+			double minCostPerKm =10;
+			double minfare = 5;
+			totalfare = (distance * minCostPerKm) + (minute * costPerMinute);
+			return totalfare;
+		}else if(choice.equalsIgnoreCase("Premium")) {
+			int costPerMinute =2;
+			double minCostPerKm =15;
+			double minfare = 20;
+			double totalfare = (distance * minCostPerKm) + (minute * costPerMinute);
+			return totalfare;
+		}
+		
+		double totalfare = (distance * MIN_COST_PER_KM) + (minute * MIN_COST_PER_MINUTE);
+		return totalfare;
 	}
 }

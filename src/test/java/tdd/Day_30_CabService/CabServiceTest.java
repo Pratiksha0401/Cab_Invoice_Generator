@@ -53,4 +53,24 @@ public class CabServiceTest {
 		InvoiceSummary expected = new InvoiceSummary(2, 30, 15);
 		assertEquals(expected, invoiceSummary);	
 	}	
+	
+	@Test
+	public void givenChoice_shouldReturn_TotalFare() {
+		String choice = "Normal";
+		double distance = 22.0;
+		int minute = 10;
+		double fare = cabService.calculateFare(choice,distance, minute);
+		assertEquals(230.0, fare,  0.0);
+			
+	}
+	
+	@Test
+	public void givenChoice_shouldReturn_TotalFare_ForGivenChoice() {
+		String choice = "Premium";
+		double distance = 11.0;
+		int minute = 7;
+		double fare = cabService.calculateFare(choice,distance, minute);
+		assertEquals(179.0, fare,  0.0);
+			
+	}
 }
