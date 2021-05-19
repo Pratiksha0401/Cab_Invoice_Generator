@@ -57,7 +57,7 @@ public class CabService {
 			return totalfare;
 		}
 		
-		double totalfare = (distance * MIN_COST_PER_KM) + (minute * MIN_COST_PER_MINUTE);
-		return totalfare;
+		//double totalfare = (distance * MIN_COST_PER_KM) + (minute * MIN_COST_PER_MINUTE);
+		return 0;
 	}
 }

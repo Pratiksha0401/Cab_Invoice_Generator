@@ -44,6 +44,16 @@ public class CabServiceTest {
 	}
 	
 	@Test
+	public void testCalculateTotalFare_Should_ReturnZero_TotalFare_forMultipleRides() {	
+		
+		Ride [] rides= {new Ride(0.0,0),
+						new Ride(0,0)
+								};
+		double Fare=cabService.calculateFare(rides);
+		assertEquals(0.0, Fare , 0);
+	}
+	
+	@Test
 	public void test_shouldReturn_TotalFare_averageFarePerRide_and_numOfRides() {	
 		Ride [] rides= {new Ride(2.0,5),
 						new Ride(0.1,1)
@@ -55,7 +65,7 @@ public class CabServiceTest {
 	}	
 	
 	@Test
-	public void givenChoice_shouldReturn_TotalFare() {
+	public void given_NormalChoice_shouldReturn_TotalFare() {
 		String choice = "Normal";
 		double distance = 22.0;
 		int minute = 10;
@@ -65,7 +75,17 @@ public class CabServiceTest {
 	}
 	
 	@Test
-	public void givenChoice_shouldReturn_TotalFare_ForGivenChoice() {
+	public void given_WrongChoice_shouldReturn_null() {
+		String choice = "Middle";
+		double distance = 22.0;
+		int minute = 10;
+		double fare = cabService.calculateFare(choice,distance, minute);
+		assertEquals(0.0, fare,  0.0);
+			
+	}
+	
+	@Test
+	public void given_PremiumChoice_shouldReturn_TotalFare_ForGivenChoice() {
 		String choice = "Premium";
 		double distance = 11.0;
 		int minute = 7;
