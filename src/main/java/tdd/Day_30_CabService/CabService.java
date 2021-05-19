@@ -21,21 +21,20 @@ public class CabService {
 		return totalfare;
 	}
 
-	public double calculateTotalFare(Ride[] rides) {
+	public double calculateFare(Ride[] rides) {
 		for(Ride ride:rides) {
 			totalfare+=this.calculateFare(ride.distance, ride.minute);
 		}
 		return totalfare;
 	}
 
-	public double averagefarePerRide(double totalFare2, int length) {
-		averagefarePerRide=totalFare2/length;
-		return averagefarePerRide;
-	}
-	
-	public int returnNumOfRides(double totalFareForMultipleRides2, double averageFarePerRide2) {
-
-		int numOfRides= (int) ( totalFareForMultipleRides2 / averageFarePerRide2 );
-		return numOfRides;
+	public InvoiceSummary calculateTotalFare(Ride[] ride) {
+		double totalfare = 0;
+		double averageFare = 0;
+		for(Ride rides: ride) {
+			totalfare += this.calculateFare(rides.distance, rides.minute);	
+		}
+		 averageFare = totalfare/ride.length;
+		return new InvoiceSummary(ride.length, totalfare, averageFare);
 	}
 }

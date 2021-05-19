@@ -39,7 +39,7 @@ public class CabServiceTest {
 		Ride [] rides= {new Ride(2.0,5),
 						new Ride(0.1,1)
 								};
-		double Fare=cabService.calculateTotalFare(rides);
+		double Fare=cabService.calculateFare(rides);
 		assertEquals(30.0, Fare , 0);
 	}
 	
@@ -49,13 +49,8 @@ public class CabServiceTest {
 						new Ride(0.1,1)
 						};
 	
-		double totalFare=cabService.calculateTotalFare(rides);
-		assertEquals(30.0, totalFare , 0);
-		
-		double averageFarePerRide=cabService.averagefarePerRide(totalFare,rides.length);
-		assertEquals(15.0, averageFarePerRide,0.0);
-		
-		int numOfRides=cabService.returnNumOfRides(totalFare, averageFarePerRide);
-		assertEquals(2, numOfRides);
+		InvoiceSummary invoiceSummary = cabService.calculateTotalFare(rides);
+		InvoiceSummary expected = new InvoiceSummary(2, 30, 15);
+		assertEquals(expected, invoiceSummary);	
 	}	
 }
